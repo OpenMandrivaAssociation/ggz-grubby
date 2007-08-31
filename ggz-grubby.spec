@@ -1,5 +1,5 @@
 %define version 0.0.14
-%define release %mkrel 1
+%define release %mkrel 2
 
 %define libggz_version %{version}
 %define ggz_client_libs_version %{version}
@@ -16,19 +16,17 @@ BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 Source0:	http://ftp.ggzgamingzone.org/pub/ggz/%{version}/%{name}-%{version}.tar.bz2
 # (Abel) 0.0.9-1mdk fix libperl detection
-Patch0:		ggz-grubby-0.0.9-check-perl.patch
-
+Patch0:		%name-0.0.9-check-perl.patch
 BuildRequires:	popt-devel
 BuildRequires:	expat-devel
 BuildRequires:	perl-devel
 BuildRequires:	python-devel
+BuildRequires:	ruby-devel
 BuildRequires:	libggz-devel = %{libggz_version}
 BuildRequires:	ggz-client-libs-devel = %{ggz_client_libs_version}
-BuildRequires:	automake1.7
-Prereq:		libggz = %{libggz_version}
-Prereq:		ggz-client-libs = %{ggz_client_libs_version}
-# ruby only includes shared library after 1.8.0-7mdk
-BuildRequires:	ruby-devel >= 1.8.0-7mdk
+Requires(pre):	libggz = %{libggz_version}
+Requires(pre):	ggz-client-libs = %{ggz_client_libs_version}
+
 
 %description
 This package contains grubby, a chatbot for GGZ Gaming Zone. It's
@@ -53,14 +51,14 @@ to support perl, python and ruby scripting.
 
 %prep
 %setup -q
-%patch0 -p1 -b .check-perl
+%patch0 -p1
 
 # Needed for patches
-libtoolize -c -f
-ACLOCAL=aclocal-1.7 AUTOMAKE=automake-1.7 autoreconf --force --install
+#libtoolize -c -f
+#ACLOCAL=aclocal-1.7 AUTOMAKE=automake-1.7 autoreconf --force --install
 
 %build
-%configure2_5x --with-libggz-libraries=%{_libdir} --with-ggzmod-libraries=%{_libdir} --with-ggzcore-libraries=%{_libdir}
+%configure --with-libggz-libraries=%{_libdir} --with-ggzmod-libraries=%{_libdir} --with-ggzcore-libraries=%{_libdir}
 %make
 
 %install
@@ -112,10 +110,8 @@ fi
 %{_libdir}/ggz/*
 %{_libdir}/grubby
 %exclude %{_libdir}/grubby/modules/libgurumod_embed.so
-
 %{_mandir}/man?/*
 %lang(de) %{_mandir}/de/man?/*
-
 %files embed
 %defattr(-,root,root)
 %{_libdir}/grubby/modules/libgurumod_embed.so
