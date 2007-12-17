@@ -12,7 +12,6 @@ Release:	%{release}
 License:	GPL
 Group:		Games/Other
 URL:		http://www.ggzgamingzone.org/
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 Source0:	http://ftp.ggzgamingzone.org/pub/ggz/%{version}/%{name}-%{version}.tar.bz2
 # (Abel) 0.0.9-1mdk fix libperl detection
