@@ -1,5 +1,5 @@
-%define version 0.0.14
-%define release %mkrel 2
+%define version 0.0.14.1
+%define release %mkrel 1
 
 %define libggz_version %{version}
 %define ggz_client_libs_version %{version}
@@ -52,10 +52,6 @@ to support perl, python and ruby scripting.
 %prep
 %setup -q
 %patch0 -p1
-
-# Needed for patches
-#libtoolize -c -f
-#ACLOCAL=aclocal-1.7 AUTOMAKE=automake-1.7 autoreconf --force --install
 
 %build
 %configure --with-libggz-libraries=%{_libdir} --with-ggzmod-libraries=%{_libdir} --with-ggzcore-libraries=%{_libdir}
