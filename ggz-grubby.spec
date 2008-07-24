@@ -1,5 +1,5 @@
 %define version 0.0.14.1
-%define release %mkrel 1
+%define release %mkrel 3
 
 %define libggz_version %{version}
 %define ggz_client_libs_version %{version}
