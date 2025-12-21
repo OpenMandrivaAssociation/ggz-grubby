@@ -17,6 +17,11 @@ BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Source0:	http://ftp.ggzgamingzone.org/pub/ggz/%{version}/%{name}-%{version}.tar.bz2
 # (Abel) 0.0.9-1mdk fix libperl detection
 Patch0:		%name-0.0.9-check-perl.patch
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	popt-devel
 BuildRequires:	expat-devel
 BuildRequires:	perl-devel
